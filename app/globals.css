@@ -3,76 +3,104 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Modern, sophisticated color palette inspired by contemporary social platforms */
 :root {
-  /* Friendster-inspired warm palette */
-  --background: oklch(0.98 0.01 45);
-  --foreground: oklch(0.2 0.01 45);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.01 45);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.01 45);
-  --primary: oklch(0.65 0.2 35);
+  /* Primary brand colors - Modern blue-teal gradient */
+  --primary: oklch(0.55 0.22 250);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.75 0.15 15);
+
+  /* Secondary accent - Vibrant coral */
+  --secondary: oklch(0.65 0.25 20);
   --secondary-foreground: oklch(1 0 0);
+
+  /* Accent - Bright cyan for interactive elements */
+  --accent: oklch(0.65 0.2 200);
+  --accent-foreground: oklch(0.15 0.01 45);
+
+  /* Neutral palette */
+  --background: oklch(0.98 0.01 45);
+  --foreground: oklch(0.15 0.01 45);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.01 45);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.01 45);
+
+  /* Muted states */
   --muted: oklch(0.92 0.01 45);
   --muted-foreground: oklch(0.5 0.01 45);
-  --accent: oklch(0.7 0.18 25);
-  --accent-foreground: oklch(1 0 0);
+
+  /* Destructive actions */
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
+
+  /* Borders and inputs */
   --border: oklch(0.92 0.01 45);
   --input: oklch(0.96 0.01 45);
-  --ring: oklch(0.65 0.2 35);
-  --chart-1: oklch(0.65 0.2 35);
-  --chart-2: oklch(0.7 0.18 25);
-  --chart-3: oklch(0.75 0.15 15);
+  --ring: oklch(0.55 0.22 250);
+
+  /* Chart colors */
+  --chart-1: oklch(0.55 0.22 250);
+  --chart-2: oklch(0.65 0.25 20);
+  --chart-3: oklch(0.65 0.2 200);
   --chart-4: oklch(0.6 0.22 40);
   --chart-5: oklch(0.68 0.19 30);
-  --radius: 1rem;
+
+  /* Sidebar */
   --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.2 0.01 45);
-  --sidebar-primary: oklch(0.65 0.2 35);
+  --sidebar-foreground: oklch(0.15 0.01 45);
+  --sidebar-primary: oklch(0.55 0.22 250);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.7 0.18 25);
+  --sidebar-accent: oklch(0.65 0.25 20);
   --sidebar-accent-foreground: oklch(1 0 0);
   --sidebar-border: oklch(0.92 0.01 45);
-  --sidebar-ring: oklch(0.65 0.2 35);
+  --sidebar-ring: oklch(0.55 0.22 250);
+
+  /* Border radius */
+  --radius: 0.75rem;
 }
 
 .dark {
-  --background: oklch(0.15 0.01 45);
-  --foreground: oklch(0.95 0.01 45);
-  --card: oklch(0.2 0.01 45);
-  --card-foreground: oklch(0.95 0.01 45);
-  --popover: oklch(0.2 0.01 45);
-  --popover-foreground: oklch(0.95 0.01 45);
-  --primary: oklch(0.65 0.2 35);
+  /* Dark mode palette */
+  --primary: oklch(0.65 0.22 250);
   --primary-foreground: oklch(0.15 0.01 45);
-  --secondary: oklch(0.75 0.15 15);
+
+  --secondary: oklch(0.75 0.25 20);
   --secondary-foreground: oklch(0.15 0.01 45);
+
+  --accent: oklch(0.75 0.2 200);
+  --accent-foreground: oklch(0.15 0.01 45);
+
+  --background: oklch(0.12 0.01 45);
+  --foreground: oklch(0.95 0.01 45);
+  --card: oklch(0.18 0.01 45);
+  --card-foreground: oklch(0.95 0.01 45);
+  --popover: oklch(0.18 0.01 45);
+  --popover-foreground: oklch(0.95 0.01 45);
+
   --muted: oklch(0.3 0.01 45);
   --muted-foreground: oklch(0.7 0.01 45);
-  --accent: oklch(0.7 0.18 25);
-  --accent-foreground: oklch(0.15 0.01 45);
+
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.95 0.01 45);
-  --border: oklch(0.3 0.01 45);
-  --input: oklch(0.25 0.01 45);
-  --ring: oklch(0.65 0.2 35);
-  --chart-1: oklch(0.65 0.2 35);
-  --chart-2: oklch(0.7 0.18 25);
-  --chart-3: oklch(0.75 0.15 15);
+
+  --border: oklch(0.25 0.01 45);
+  --input: oklch(0.2 0.01 45);
+  --ring: oklch(0.65 0.22 250);
+
+  --chart-1: oklch(0.65 0.22 250);
+  --chart-2: oklch(0.75 0.25 20);
+  --chart-3: oklch(0.75 0.2 200);
   --chart-4: oklch(0.6 0.22 40);
   --chart-5: oklch(0.68 0.19 30);
-  --sidebar: oklch(0.2 0.01 45);
+
+  --sidebar: oklch(0.15 0.01 45);
   --sidebar-foreground: oklch(0.95 0.01 45);
-  --sidebar-primary: oklch(0.65 0.2 35);
+  --sidebar-primary: oklch(0.65 0.22 250);
   --sidebar-primary-foreground: oklch(0.15 0.01 45);
-  --sidebar-accent: oklch(0.7 0.18 25);
+  --sidebar-accent: oklch(0.75 0.25 20);
   --sidebar-accent-foreground: oklch(0.15 0.01 45);
-  --sidebar-border: oklch(0.3 0.01 45);
-  --sidebar-ring: oklch(0.65 0.2 35);
+  --sidebar-border: oklch(0.25 0.01 45);
+  --sidebar-ring: oklch(0.65 0.22 250);
 }
 
 @theme inline {
@@ -123,4 +151,77 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Smooth scrolling and modern typography */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced focus states for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
 }
+
+/* Smooth animations and transitions */
+@layer utilities {
+  .hover-lift {
+    @apply hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ease-out;
+  }
+
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+
+  .glass-effect-dark {
+    @apply bg-slate-900/80 backdrop-blur-md border border-slate-700/20;
+  }
+
+  .animate-fade-in {
+    @apply opacity-0 animate-[fade-in_0.3s_ease-out_forwards];
+  }
+
+  .animate-slide-up {
+    @apply translate-y-4 opacity-0 animate-[slide-up_0.3s_ease-out_forwards];
+  }
+
+  .animate-slide-down {
+    @apply -translate-y-4 opacity-0 animate-[slide-down_0.3s_ease-out_forwards];
+  }
+
+  .animate-scale {
+    @apply scale-95 opacity-0 animate-[scale_0.2s_ease-out_forwards];
+  }
+
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-down {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes scale {
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .focus-ring {
+    @apply focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus-visible:outline-none;
+  }
+}
+

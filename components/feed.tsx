@@ -21,12 +21,12 @@ export function Feed({ currentUser }: { currentUser: any }) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <CreatePost onCreatePost={handleCreatePost} currentUser={currentUser} />
 
       {posts.length === 0 ? (
-        <div className="bg-white rounded-3xl shadow-lg p-12 text-center border-0">
-          <p className="text-gray-500 text-lg">No posts yet. Be the first to share!</p>
+        <div className="bg-card rounded-2xl shadow-md p-12 text-center border border-border">
+          <p className="text-muted-foreground text-lg">No posts yet. Be the first to share something amazing!</p>
         </div>
       ) : (
         posts.map((post) => <PostCard key={post.id} post={post} currentUser={currentUser} />)

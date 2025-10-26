@@ -6,6 +6,8 @@ import { Feed } from "@/components/feed"
 import { ProfileSidebar } from "@/components/profile-sidebar"
 import { FriendsPage } from "@/components/friends-page"
 import { MessagesPage } from "@/components/messages-page"
+import { TrendingSidebar } from "@/components/trending-sidebar"
+import { NotificationBell } from "@/components/notification-bell"
 
 export function Dashboard({ currentUser, onLogout }: { currentUser: any; onLogout: () => void }) {
   const [activeTab, setActiveTab] = useState("feed")
@@ -21,7 +23,6 @@ export function Dashboard({ currentUser, onLogout }: { currentUser: any; onLogou
   const handleAcceptFriendRequest = (requestId: string) => {
     const request = friendRequests.find((r) => r.id === requestId)
     if (request) {
-      // Add to friends list
       const updatedUsers = users.map((u) => {
         if (u.id === currentUser.id) {
           return { ...u, friends: [...(u.friends || []), request.fromId] }
@@ -34,7 +35,6 @@ export function Dashboard({ currentUser, onLogout }: { currentUser: any; onLogou
       setUsers(updatedUsers)
       localStorage.setItem("users", JSON.stringify(updatedUsers))
 
-      // Remove request
       const updated = friendRequests.filter((r) => r.id !== requestId)
       setFriendRequests(updated)
       localStorage.setItem("friendRequests", JSON.stringify(updated))
@@ -48,9 +48,8 @@ export function Dashboard({ currentUser, onLogout }: { currentUser: any; onLogou
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-pink-50 to-rose-50">
+    <div className="min-h-screen bg-background">
       <div className="flex">
-        {/* Left Sidebar */}
         <Sidebar
           currentUser={currentUser}
           activeTab={activeTab}
@@ -59,9 +58,13 @@ export function Dashboard({ currentUser, onLogout }: { currentUser: any; onLogou
           friendRequestCount={friendRequests.filter((r) => r.toId === currentUser.id).length}
         />
 
-        {/* Main Content */}
         <div className="flex-1 ml-64 p-6">
           <div className="max-w-4xl mx-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h1 className="text-2xl font-bold text-foreground capitalize">{activeTab}</h1>
+              <NotificationBell unreadCount={3} />
+            </div>
+
             {activeTab === "feed" && <Feed currentUser={currentUser} />}
             {activeTab === "profile" && <ProfileSidebar user={currentUser} />}
             {activeTab === "friends" && (
@@ -78,33 +81,7 @@ export function Dashboard({ currentUser, onLogout }: { currentUser: any; onLogou
           </div>
         </div>
 
-        {/* Right Sidebar - Friends */}
-        <div className="w-64 p-6 hidden lg:block">
-          <div className="bg-white rounded-3xl shadow-lg p-6 border-l-4 border-orange-400">
-            <h3 className="font-bold text-lg text-gray-800 mb-4">Friends</h3>
-            {users.find((u) => u.id === currentUser.id)?.friends?.length > 0 ? (
-              <div className="space-y-2">
-                {users
-                  .find((u) => u.id === currentUser.id)
-                  ?.friends?.map((friendId: string) => {
-                    const friend = users.find((u) => u.id === friendId)
-                    return (
-                      <div key={friendId} className="flex items-center gap-2 p-2 rounded-lg hover:bg-orange-50">
-                        <img
-                          src={friend?.avatar || "/placeholder.svg"}
-                          alt={friend?.name}
-                          className="w-8 h-8 rounded-full border border-orange-300"
-                        />
-                        <span className="text-sm font-medium text-gray-700">{friend?.name}</span>
-                      </div>
-                    )
-                  })}
-              </div>
-            ) : (
-              <p className="text-gray-500 text-sm">No friends yet. Add some!</p>
-            )}
-          </div>
-        </div>
+        <TrendingSidebar />
       </div>
     </div>
   )
