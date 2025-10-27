@@ -47,7 +47,7 @@ export function ProfileEditDialog({ isOpen, onClose, user, onSave }: ProfileEdit
   const handleRemoveInterest = (index: number) => {
     setFormData((prev) => ({
       ...prev,
-      interests: prev.interests.filter((_, i) => i !== index),
+      interests: prev.interests.filter((_: string, i: number) => i !== index),
     }))
   }
 
