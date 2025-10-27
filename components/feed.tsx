@@ -7,17 +7,49 @@ import { PostCard } from "@/components/post-card"
 export function Feed({ currentUser }: { currentUser: any }) {
   const [posts, setPosts] = useState<any[]>([])
 
-  const handleCreatePost = (content: string) => {
-    const newPost = {
-      id: Date.now().toString(),
-      author: currentUser,
-      content,
-      timestamp: new Date().toISOString(),
-      likes: 0,
-      comments: [],
-      liked: false,
+  const handleCreatePost = (content: string, mediaFiles: File[]) => {
+    const processMedia = async () => {
+      const mediaPromises = mediaFiles.map(
+        (file) =>
+          new Promise<{ type: string; url: string }>((resolve) => {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+              resolve({
+                type: file.type,
+                url: e.target?.result as string,
+              })
+            }
+            reader.readAsDataURL(file)
+          }),
+      )
+
+      const media = await Promise.all(mediaPromises)
+
+      const newPost = {
+        id: Date.now().toString(),
+        author: currentUser,
+        content,
+        media: media.length > 0 ? media : undefined,
+        timestamp: new Date().toISOString(),
+        reactions: {},
+        comments: [],
+      }
+      setPosts([newPost, ...posts])
     }
-    setPosts([newPost, ...posts])
+
+    if (mediaFiles.length > 0) {
+      processMedia()
+    } else {
+      const newPost = {
+        id: Date.now().toString(),
+        author: currentUser,
+        content,
+        timestamp: new Date().toISOString(),
+        reactions: {},
+        comments: [],
+      }
+      setPosts([newPost, ...posts])
+    }
   }
 
   return (

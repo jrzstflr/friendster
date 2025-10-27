@@ -1,11 +1,15 @@
 "use client"
 
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import { Home, User, Users, MessageSquare, Settings, LogOut, Sparkles } from "lucide-react"
+import { Home, User, Users, MessageSquare, Settings, LogOut, Sparkles, Menu } from "lucide-react"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 export function Sidebar({ currentUser, activeTab, setActiveTab, onLogout, friendRequestCount }: any) {
+  const [isOpen, setIsOpen] = useState(false)
+
   const menuItems = [
     { id: "feed", label: "Feed", icon: Home },
     { id: "profile", label: "Profile", icon: User },
@@ -13,8 +17,13 @@ export function Sidebar({ currentUser, activeTab, setActiveTab, onLogout, friend
     { id: "messages", label: "Messages", icon: MessageSquare },
   ]
 
-  return (
-    <div className="fixed left-0 top-0 h-screen w-64 bg-card shadow-lg border-r border-border p-6 overflow-y-auto flex flex-col">
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId)
+    setIsOpen(false)
+  }
+
+  const SidebarContent = () => (
+    <div className="flex flex-col h-full">
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-2">
           <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
@@ -44,7 +53,7 @@ export function Sidebar({ currentUser, activeTab, setActiveTab, onLogout, friend
           return (
             <button
               key={item.id}
-              onClick={() => setActiveTab(item.id)}
+              onClick={() => handleTabChange(item.id)}
               className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-300 ease-out flex items-center gap-3 relative group ${
                 activeTab === item.id
                   ? "bg-primary text-primary-foreground shadow-md"
@@ -80,5 +89,37 @@ export function Sidebar({ currentUser, activeTab, setActiveTab, onLogout, friend
         </Button>
       </div>
     </div>
+  )
+
+  return (
+    <>
+      {/* Desktop Sidebar */}
+      <div className="hidden lg:fixed lg:left-0 lg:top-0 lg:h-screen lg:w-64 lg:bg-card lg:shadow-lg lg:border-r lg:border-border lg:p-6 lg:overflow-y-auto lg:flex lg:flex-col">
+        <SidebarContent />
+      </div>
+
+      {/* Mobile Navigation */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-card border-b border-border z-40 flex items-center justify-between px-4">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+            <Sparkles className="h-5 w-5 text-primary-foreground" />
+          </div>
+          <h1 className="text-xl font-bold text-foreground">Friendster</h1>
+        </div>
+
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+              <Menu className="h-5 w-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-64 p-0">
+            <div className="p-6">
+              <SidebarContent />
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+    </>
   )
 }

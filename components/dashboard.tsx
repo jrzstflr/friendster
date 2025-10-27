@@ -49,20 +49,23 @@ export function Dashboard({ currentUser, onLogout }: { currentUser: any; onLogou
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="flex">
-        <Sidebar
-          currentUser={currentUser}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          onLogout={onLogout}
-          friendRequestCount={friendRequests.filter((r) => r.toId === currentUser.id).length}
-        />
+      <Sidebar
+        currentUser={currentUser}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onLogout={onLogout}
+        friendRequestCount={friendRequests.filter((r) => r.toId === currentUser.id).length}
+      />
 
-        <div className="flex-1 ml-64 p-6">
+      <div className="flex flex-col lg:flex-row">
+        {/* Main Content */}
+        <div className="flex-1 lg:ml-64 p-4 lg:p-6 pt-20 lg:pt-6">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-6">
               <h1 className="text-2xl font-bold text-foreground capitalize">{activeTab}</h1>
-              <NotificationBell unreadCount={3} />
+              <div className="hidden md:block">
+                <NotificationBell unreadCount={3} />
+              </div>
             </div>
 
             {activeTab === "feed" && <Feed currentUser={currentUser} />}
@@ -81,7 +84,15 @@ export function Dashboard({ currentUser, onLogout }: { currentUser: any; onLogou
           </div>
         </div>
 
-        <TrendingSidebar />
+        {/* Trending Sidebar - Hidden on mobile */}
+        <div className="hidden xl:block w-80 bg-card border-l border-border p-6 overflow-y-auto">
+          <TrendingSidebar />
+        </div>
+      </div>
+
+      {/* Mobile Notification Bell */}
+      <div className="md:hidden fixed bottom-6 right-6 z-30">
+        <NotificationBell unreadCount={3} />
       </div>
     </div>
   )
